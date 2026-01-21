@@ -109,6 +109,12 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
+        if ($company->employees()->exists()) {
+            return redirect()
+                ->back()
+                ->with('error', 'This company cannot be deleted while employees are assigned to it.');
+        }
+
         $company->delete();
 
         return redirect()->route('companies.index')

@@ -35,36 +35,38 @@
                 </div>
                 <div class="card-body">
                     @if($recentCompanies->count())
-                        <table class="table table-hover align-middle mb-3">
-                            <thead>
-                                <tr>
-                                    <th style="width:60px"></th>
-                                    <th>Recently Added</th>
-                                    <th>Date Added</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($recentCompanies as $company)
-                                    <tr onclick="window.location='{{ route('companies.show', $company) }}'" style="cursor:pointer;">
-                                        <td>
-                                            @if ($company->logo)
-                                                <img src="{{ asset('storage/'.$company->logo) }}"
-                                                     alt="{{ $company->name }} logo"
-                                                     class="company-logo-img"
-                                                     style="width:40px;height:40px;object-fit:cover;">
-                                            @else
-                                                <img src="{{ asset('images/company-placeholder.png') }}"
-                                                     alt="Placeholder logo for {{ $company->name }}"
-                                                     class="company-logo-img"
-                                                     style="width:40px;height:40px;object-fit:cover;">
-                                            @endif
-                                        </td>
-                                        <td>{{ $company->name }}</td>
-                                        <td>{{ optional($company->created_at)->format('d M Y') }}</td>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-3">
+                                <thead>
+                                    <tr>
+                                        <th style="width:60px"></th>
+                                        <th>Recently Added</th>
+                                        <th>Date Added</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach($recentCompanies as $company)
+                                        <tr onclick="window.location='{{ route('companies.show', $company) }}'" style="cursor:pointer;">
+                                            <td>
+                                                @if ($company->logo)
+                                                    <img src="{{ asset('storage/'.$company->logo) }}"
+                                                         alt="{{ $company->name }} logo"
+                                                         class="company-logo-img"
+                                                         style="width:40px;height:40px;object-fit:cover;">
+                                                @else
+                                                    <img src="{{ asset('images/company-placeholder.png') }}"
+                                                         alt="Placeholder logo for {{ $company->name }}"
+                                                         class="company-logo-img"
+                                                         style="width:40px;height:40px;object-fit:cover;">
+                                                @endif
+                                            </td>
+                                            <td>{{ $company->name }}</td>
+                                            <td>{{ optional($company->created_at)->format('d M Y') }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @else
                         <p class="mb-3 text-muted">No companies have been added yet.</p>
                     @endif
@@ -82,36 +84,38 @@
                 </div>
                 <div class="card-body">
                     @if($recentEmployees->count())
-                        <table class="table table-hover align-middle mb-3">
-                            <thead>
-                                <tr>
-                                    <th style="width:60px"></th>
-                                    <th>Recently Added</th>
-                                    <th>Date Added</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($recentEmployees as $employee)
-                                    <tr onclick="window.location='{{ route('employees.show', $employee) }}'" style="cursor:pointer;">
-                                        <td>
-                                            @if ($employee->avatar)
-                                                <img src="{{ asset('storage/'.$employee->avatar) }}"
-                                                     alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar"
-                                                     class="rounded-circle employee-avatar-img"
-                                                     style="width:40px;height:40px;object-fit:cover;">
-                                            @else
-                                                <img src="{{ asset('images/employee-placeholder.jpg') }}"
-                                                     alt="Employee avatar placeholder"
-                                                     class="rounded-circle employee-placeholder-img employee-avatar-img"
-                                                     style="width:40px;height:40px;object-fit:cover;">
-                                            @endif
-                                        </td>
-                                        <td>{{ $employee->first_name }} {{ $employee->last_name }}</td>
-                                        <td>{{ optional($employee->created_at)->format('d M Y') }}</td>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-3">
+                                <thead>
+                                    <tr>
+                                        <th style="width:60px"></th>
+                                        <th>Recently Added</th>
+                                        <th>Date Added</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach($recentEmployees as $employee)
+                                        <tr onclick="window.location='{{ route('employees.show', $employee) }}'" style="cursor:pointer;">
+                                            <td>
+                                                @if ($employee->avatar)
+                                                    <img src="{{ asset('storage/'.$employee->avatar) }}"
+                                                         alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar"
+                                                         class="rounded-circle employee-avatar-img"
+                                                         style="width:40px;height:40px;object-fit:cover;">
+                                                @else
+                                                    <img src="{{ asset('images/employee-placeholder.jpg') }}"
+                                                         alt="Employee avatar placeholder"
+                                                         class="rounded-circle employee-placeholder-img employee-avatar-img"
+                                                         style="width:40px;height:40px;object-fit:cover;">
+                                                @endif
+                                            </td>
+                                            <td>{{ $employee->first_name }} {{ $employee->last_name }}</td>
+                                            <td>{{ optional($employee->created_at)->format('d M Y') }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @else
                         <p class="mb-3 text-muted">No employees have been added yet.</p>
                     @endif

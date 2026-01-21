@@ -26,6 +26,16 @@
         };
     @endphp
 
+    @if (session('error'))
+        <div class="row mb-3" data-auto-dismiss-container>
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-auto-dismiss mb-0 text-center" data-auto-dismiss="6500">
+                    {{ session('error') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="card mb-3">
@@ -99,6 +109,7 @@
             <div class="card">
                 <div class="card-body p-0">
                     @if ($employees->count())
+                        <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
                             <thead>
                                 <tr>
@@ -211,6 +222,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
                         <div class="mt-3 px-3 pb-3" id="pagination">
                             {{ $employees->links() }}
                         </div>

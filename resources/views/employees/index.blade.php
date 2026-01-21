@@ -39,9 +39,9 @@
     </div>
 
     @if (session('status'))
-        <div class="row mb-3">
+        <div class="row mb-3" data-auto-dismiss-container>
             <div class="col-md-12">
-                <div class="alert alert-success mb-0 text-center">
+                <div class="alert alert-success alert-auto-dismiss mb-0 text-center" data-auto-dismiss="4500">
                     {{ session('status') }}
                 </div>
             </div>
@@ -51,6 +51,7 @@
     @if ($employees->count())
         <div class="card">
             <div class="card-body p-0">
+                <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead>
                 <tr>
@@ -178,6 +179,7 @@
                 @endforeach
             </tbody>
         </table>
+                </div>
             </div>
         </div>
 

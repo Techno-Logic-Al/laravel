@@ -9,6 +9,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" type="image/png" href="{{ asset('favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ asset('favicon-16x16.png') }}" sizes="16x16">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -16,7 +21,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body class="app-body" data-theme="neon">
+<body class="app-body" data-theme="mono">
     <div id="page-transition-overlay" class="page-transition-overlay"></div>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark app-navbar shadow-sm">
@@ -47,18 +52,15 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item d-flex align-items-center me-2">
+                        <li class="nav-item me-md-2 d-md-flex align-items-md-center">
                             <button
                                 type="button"
-                                class="btn btn-link nav-link p-0 d-flex align-items-center gap-1 theme-toggle"
+                                class="btn btn-primary btn-sm theme-toggle"
                                 id="theme-toggle"
-                                aria-label="Toggle theme"
-                                aria-pressed="false"
+                                aria-label="Switch to neon mode"
+                                aria-pressed="true"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                    <path fill="none" d="M0 0h24v24H0z"/>
-                                    <path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 1 1 0 0 0-1.555-.832A7 7 0 1 1 12.832 4 1 1 0 0 0 12 3z"/>
-                                </svg>
+                                <span data-theme-toggle-label>Neon mode</span>
                             </button>
                         </li>
                         <!-- Authentication Links -->
