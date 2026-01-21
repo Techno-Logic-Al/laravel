@@ -97,7 +97,7 @@
                         <a href="{{ route('employees.create', ['company_id' => $company->id]) }}" class="btn btn-primary">
                             Add Employee
                         </a>
-                        <a href="{{ route('companies.index') }}" class="btn btn-secondary">Back</a>
+                        <a href="{{ route('companies.index') }}" class="btn btn-secondary">BACK</a>
                     </div>
                 </div>
             </div>

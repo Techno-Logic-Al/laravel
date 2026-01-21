@@ -116,7 +116,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete Employee</button>
                         </form>
-                        <a href="{{ route('employees.index') }}" class="btn btn-secondary">Back</a>
+                        <a href="{{ route('employees.index') }}" class="btn btn-secondary">BACK</a>
                     </div>
                 </div>
             </div>
