@@ -221,6 +221,106 @@ function setupAutoDismissAlerts() {
     });
 }
 
+function showTransientAlert(message, type = 'danger', timeoutMs = 6500) {
+    if (!message) {
+        return;
+    }
+
+    const mount = document.querySelector('.app-main .container') || document.querySelector('.app-main') || document.body;
+    if (!mount) {
+        window.alert(message);
+        return;
+    }
+
+    const row = document.createElement('div');
+    row.className = 'row mb-3';
+    row.setAttribute('data-auto-dismiss-container', '');
+
+    const col = document.createElement('div');
+    col.className = 'col-md-12';
+
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} alert-auto-dismiss mb-0 text-center`;
+    alert.dataset.autoDismiss = String(timeoutMs);
+    alert.textContent = message;
+
+    col.appendChild(alert);
+    row.appendChild(col);
+    mount.prepend(row);
+
+    setupAutoDismissAlerts();
+}
+
+function setupCompanyDeleteChecks() {
+    const forms = document.querySelectorAll('form[data-company-delete-form]');
+
+    forms.forEach((form) => {
+        if (form.dataset.companyDeleteInitialized === 'true') {
+            return;
+        }
+
+        form.dataset.companyDeleteInitialized = 'true';
+
+        form.addEventListener('submit', async (event) => {
+            if (form.dataset.companyDeleteConfirmed === 'true') {
+                return;
+            }
+
+            event.preventDefault();
+
+            if (form.dataset.companyDeleteChecking === 'true') {
+                return;
+            }
+
+            form.dataset.companyDeleteChecking = 'true';
+
+            const checkUrl = form.dataset.canDeleteUrl;
+            const confirmMessage = form.dataset.confirmMessage || 'Delete this company?';
+            const fallbackCannotDeleteMessage =
+                'This company cannot be deleted while employees are assigned to it.';
+
+            const proceedWithConfirm = () => {
+                if (window.confirm(confirmMessage)) {
+                    form.dataset.companyDeleteConfirmed = 'true';
+                    form.submit();
+                }
+            };
+
+            try {
+                if (!checkUrl) {
+                    proceedWithConfirm();
+                    return;
+                }
+
+                const response = await window.fetch(checkUrl, {
+                    method: 'GET',
+                    credentials: 'same-origin',
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    proceedWithConfirm();
+                    return;
+                }
+
+                const data = await response.json();
+                if (data && data.can_delete === false) {
+                    showTransientAlert(data.message || fallbackCannotDeleteMessage, 'danger', 6500);
+                    return;
+                }
+
+                proceedWithConfirm();
+            } catch (error) {
+                proceedWithConfirm();
+            } finally {
+                form.dataset.companyDeleteChecking = 'false';
+            }
+        });
+    });
+}
+
 window.addEventListener('pagehide', resetPageTransitionState);
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
@@ -228,6 +328,7 @@ window.addEventListener('pageshow', (event) => {
     }
 
     setupAutoDismissAlerts();
+    setupCompanyDeleteChecks();
 });
 
 function setupThemeToggle() {
@@ -274,4 +375,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setupPageTransitions();
     setupAutoDismissAlerts();
     setupThemeToggle();
+    setupCompanyDeleteChecks();
 });

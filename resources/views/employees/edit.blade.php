@@ -76,7 +76,7 @@
                         <div class="mb-3">
                             <label class="form-label">Current Avatar</label><br>
                             @if ($employee->avatar)
-                                <img src="{{ asset('storage/'.$employee->avatar) }}" alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar" class="rounded-circle employee-avatar-img" style="width:60px;height:60px;object-fit:cover;">
+                                <img src="{{ route('media', ['path' => $employee->avatar]) }}" alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar" class="rounded-circle employee-avatar-img" style="width:60px;height:60px;object-fit:cover;">
                             @else
                                 <img src="{{ asset('images/employee-placeholder.jpg') }}" alt="Employee avatar placeholder" class="rounded-circle employee-placeholder-img employee-avatar-img" style="width:60px;height:60px;object-fit:cover;">
                             @endif

@@ -120,7 +120,7 @@
                         <td>
                             <a href="{{ route('employees.show', $employee) }}" class="d-block">
                                 @if ($employee->avatar)
-                                    <img src="{{ asset('storage/'.$employee->avatar) }}"
+                                    <img src="{{ route('media', ['path' => $employee->avatar]) }}"
                                          alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar"
                                          class="rounded-circle employee-avatar-img"
                                          style="width:40px;height:40px;object-fit:cover;">
@@ -168,12 +168,14 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('employees.edit', $employee) }}" class="btn btn-sm btn-primary me-1">Edit</a>
-                            <form action="{{ route('employees.destroy', $employee) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this employee?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
+                            <div class="d-flex flex-column flex-xl-row gap-2 gap-xl-1 align-items-start align-items-xl-center">
+                                <a href="{{ route('employees.edit', $employee) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <form action="{{ route('employees.destroy', $employee) }}" method="POST" onsubmit="return confirm('Delete this employee?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

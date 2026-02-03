@@ -39,14 +39,14 @@
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="card mb-3">
-                <div class="card-header">
+                <div class="card-header company-profile-header">
                     <span class="fs-3">{{ $company->name }}</span>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex align-items-center mb-4">
+                    <div class="d-flex align-items-center mb-4 company-profile">
                         <div class="me-4">
                             @if ($company->logo)
-                                <img src="{{ asset('storage/'.$company->logo) }}"
+                                <img src="{{ route('media', ['path' => $company->logo]) }}"
                                      alt="{{ $company->name }} logo"
                                      class="company-logo-img"
                                      style="width:100px;height:100px;object-fit:cover;">
@@ -87,9 +87,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-start flex-wrap gap-3 mt-3">
+                    <div class="d-flex justify-content-start flex-wrap gap-3 mt-3 company-profile-actions">
                         <a href="{{ route('companies.edit', $company) }}" class="btn btn-primary">Edit Company</a>
-                        <form action="{{ route('companies.destroy', $company) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this company?');">
+                        <form action="{{ route('companies.destroy', $company) }}" method="POST" class="d-inline" data-company-delete-form data-can-delete-url="{{ route('companies.can-delete', $company) }}" data-confirm-message="Delete this company?">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete Company</button>
@@ -181,7 +181,7 @@
                                         <td>
                                             <a href="{{ route('employees.show', $employee) }}" class="d-block">
                                                 @if ($employee->avatar)
-                                                    <img src="{{ asset('storage/'.$employee->avatar) }}"
+                                                    <img src="{{ route('media', ['path' => $employee->avatar]) }}"
                                                          alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar"
                                                          class="rounded-circle employee-avatar-img"
                                                          style="width:40px;height:40px;object-fit:cover;">
@@ -228,7 +228,7 @@
                         </div>
                     @else
                         <div class="p-3">
-                            <p class="mb-0 text-muted">No employees have been added for this company yet.</p>
+                            <p class="mb-0 text-white">No employees have been added for this company yet.</p>
                         </div>
                     @endif
                 </div>

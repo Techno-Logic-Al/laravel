@@ -47,7 +47,7 @@ class CompanyController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('logos', 'public');
+            $data['logo'] = $request->file('logo')->storePublicly('logos', 'public');
         }
 
         Company::create($data);
@@ -95,7 +95,7 @@ class CompanyController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('logos', 'public');
+            $data['logo'] = $request->file('logo')->storePublicly('logos', 'public');
         }
 
         $company->update($data);
@@ -107,6 +107,18 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function canDelete(Company $company)
+    {
+        $hasEmployees = $company->employees()->exists();
+
+        return response()->json([
+            'can_delete' => !$hasEmployees,
+            'message' => $hasEmployees
+                ? 'This company cannot be deleted while employees are assigned to it.'
+                : null,
+        ]);
+    }
+
     public function destroy(Company $company)
     {
         if ($company->employees()->exists()) {

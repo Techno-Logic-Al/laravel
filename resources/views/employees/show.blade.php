@@ -5,16 +5,16 @@
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="card mb-3">
-                <div class="card-header">
+                <div class="card-header employee-profile-header">
                     <span class="fs-3">{{ $employee->first_name }} {{ $employee->last_name }}</span>
                 </div>
                 <div class="card-body">
                     <div class="row align-items-start mb-4">
                         <div class="col-md-6 mb-3 mb-md-0">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center employee-profile">
                                 <div class="me-4">
                                     @if ($employee->avatar)
-                                        <img src="{{ asset('storage/'.$employee->avatar) }}"
+                                        <img src="{{ route('media', ['path' => $employee->avatar]) }}"
                                              alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar"
                                              class="rounded-circle employee-avatar-img"
                                              style="width:100px;height:100px;object-fit:cover;">
@@ -58,11 +58,11 @@
                                 $company = $employee->company;
                             @endphp
                             @if ($company)
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center employee-company-profile">
                                     <div class="me-4">
                                         <a href="{{ route('companies.show', $company) }}" class="d-inline-block text-decoration-none">
                                             @if ($company->logo)
-                                                <img src="{{ asset('storage/'.$company->logo) }}"
+                                                <img src="{{ route('media', ['path' => $company->logo]) }}"
                                                      alt="{{ $company->name }} logo"
                                                      class="company-logo-img"
                                                      style="width:100px;height:100px;object-fit:cover;">
@@ -109,7 +109,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="d-flex justify-content-start flex-wrap gap-3 mt-3">
+                    <div class="d-flex justify-content-start flex-wrap gap-3 mt-3 employee-profile-actions">
                         <a href="{{ route('employees.edit', $employee) }}" class="btn btn-primary">Edit Employee</a>
                         <form action="{{ route('employees.destroy', $employee) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this employee?');">
                             @csrf

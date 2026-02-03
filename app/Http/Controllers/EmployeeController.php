@@ -54,7 +54,7 @@ class EmployeeController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request->file('avatar')->store('employee-avatars', 'public');
+            $data['avatar'] = $request->file('avatar')->storePublicly('employee-avatars', 'public');
         }
 
         Employee::create($data);
@@ -91,7 +91,7 @@ class EmployeeController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request->file('avatar')->store('employee-avatars', 'public');
+            $data['avatar'] = $request->file('avatar')->storePublicly('employee-avatars', 'public');
         }
 
         $employee->update($data);

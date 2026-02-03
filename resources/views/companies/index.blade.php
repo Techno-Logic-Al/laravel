@@ -120,7 +120,7 @@
                                     <td>
                                         @if ($company->logo)
                                             <a href="{{ route('companies.show', $company) }}" class="d-block">
-                                                 <img src="{{ asset('storage/'.$company->logo) }}"
+                                                 <img src="{{ route('media', ['path' => $company->logo]) }}"
                                                      alt="{{ $company->name }} logo"
                                                      class="company-logo-img"
                                                      style="width:40px;height:40px;object-fit:cover;">
@@ -160,12 +160,14 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('companies.edit', $company) }}" class="btn btn-sm btn-primary me-1">Edit</a>
-                                        <form action="{{ route('companies.destroy', $company) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this company?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        </form>
+                                        <div class="d-flex flex-column flex-xl-row gap-2 gap-xl-1 align-items-start align-items-xl-center">
+                                            <a href="{{ route('companies.edit', $company) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            <form action="{{ route('companies.destroy', $company) }}" method="POST" data-company-delete-form data-can-delete-url="{{ route('companies.can-delete', $company) }}" data-confirm-message="Delete this company?">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

@@ -49,10 +49,10 @@
                                         <tr onclick="window.location='{{ route('companies.show', $company) }}'" style="cursor:pointer;">
                                             <td>
                                                 @if ($company->logo)
-                                                    <img src="{{ asset('storage/'.$company->logo) }}"
-                                                         alt="{{ $company->name }} logo"
-                                                         class="company-logo-img"
-                                                         style="width:40px;height:40px;object-fit:cover;">
+                                                    <img src="{{ route('media', ['path' => $company->logo]) }}"
+                                                     alt="{{ $company->name }} logo"
+                                                     class="company-logo-img"
+                                                     style="width:40px;height:40px;object-fit:cover;">
                                                 @else
                                                     <img src="{{ asset('images/company-placeholder.png') }}"
                                                          alt="Placeholder logo for {{ $company->name }}"
@@ -98,10 +98,10 @@
                                         <tr onclick="window.location='{{ route('employees.show', $employee) }}'" style="cursor:pointer;">
                                             <td>
                                                 @if ($employee->avatar)
-                                                    <img src="{{ asset('storage/'.$employee->avatar) }}"
-                                                         alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar"
-                                                         class="rounded-circle employee-avatar-img"
-                                                         style="width:40px;height:40px;object-fit:cover;">
+                                                    <img src="{{ route('media', ['path' => $employee->avatar]) }}"
+                                                     alt="{{ $employee->first_name }} {{ $employee->last_name }} avatar"
+                                                     class="rounded-circle employee-avatar-img"
+                                                     style="width:40px;height:40px;object-fit:cover;">
                                                 @else
                                                     <img src="{{ asset('images/employee-placeholder.jpg') }}"
                                                          alt="Employee avatar placeholder"

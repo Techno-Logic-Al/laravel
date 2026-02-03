@@ -41,7 +41,7 @@
                         <div class="mb-3">
                             <label class="form-label">Current Logo</label><br>
                             @if ($company->logo)
-                                <img src="{{ asset('storage/'.$company->logo) }}" alt="{{ $company->name }} logo" style="max-width: 100px; max-height: 100px;">
+                                <img src="{{ route('media', ['path' => $company->logo]) }}" alt="{{ $company->name }} logo" style="max-width: 100px; max-height: 100px;">
                             @else
                                 <img src="{{ asset('images/company-placeholder.png') }}" alt="Placeholder logo for {{ $company->name }}" style="max-width: 100px; max-height: 100px;">
                             @endif

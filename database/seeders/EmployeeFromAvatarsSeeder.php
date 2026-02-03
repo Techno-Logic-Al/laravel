@@ -140,4 +140,3 @@ class EmployeeFromAvatarsSeeder extends Seeder
         return [$first, $last];
     }
 }
-

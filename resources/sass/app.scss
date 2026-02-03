@@ -101,6 +101,34 @@ body.app-body {
     }
 }
 
+@media (max-width: 467.98px) {
+    .company-profile-header,
+    .employee-profile-header {
+        text-align: center;
+    }
+
+    .company-profile,
+    .employee-profile,
+    .employee-company-profile {
+        flex-direction: column;
+        align-items: center !important;
+        text-align: center;
+    }
+
+    .company-profile > .me-4,
+    .employee-profile > .me-4,
+    .employee-company-profile > .me-4 {
+        margin-right: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .company-profile-actions,
+    .employee-profile-actions {
+        justify-content: center !important;
+        align-items: center;
+    }
+}
+
 .navbar-search {
     max-width: 360px;
     display: flex;
